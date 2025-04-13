@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreferenceCompat
+        android:key="pref_block_unknown"
+        android:title="Block Unknown Callers"
+        android:summary="Automatically block calls from unknown numbers"
+        android:defaultValue="false" />
+
+    <ListPreference
+        android:key="pref_country"
+        android:title="Country Filter"
+        android:summary="%s"
+        android:entries="@array/country_names"
+        android:entryValues="@array/country_abbreviations"
+        android:defaultValue="US"
+        android:dialogTitle="Select a country" />
+
+    <!-- Area Code Filter Toggle -->
+    <SwitchPreferenceCompat
+        android:key="pref_enable_area_code_filter"
+        android:title="Enable Area Code Filter"
+        android:defaultValue="false"
+        android:summary="Block calls from specific area codes" />
+
+    <!-- Area Code Entry -->
+    <EditTextPreference
+        android:key="pref_area_codes"
+        android:title="Blocked Area Codes"
+        android:summary="Comma-separated area codes (e.g. 415, 212)"
+        android:dialogTitle="Enter Area Codes"
+        android:inputType="number"
+        android:enabled="false" />
+
+    <ListPreference
+        android:key="pref_theme"
+        android:title="App Theme"
+        android:summary="%s"
+        android:entries="@array/theme_options"
+        android:entryValues="@array/theme_values"
+        android:defaultValue="system" />
+
+</PreferenceScreen>

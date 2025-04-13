@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="country_names">
+        <item>United States (+1)</item>
+        <item>Canada (+1)</item>
+        <item>United Kingdom (+44)</item>
+        <item>Germany (+49)</item>
+        <item>France (+33)</item>
+        <item>India (+91)</item>
+        <item>Australia (+61)</item>
+        <item>Japan (+81)</item>
+        <item>Brazil (+55)</item>
+        <item>Mexico (+52)</item>
+        <!-- Add more as needed -->
+    </string-array>
+
+    <string-array name="country_abbreviations">
+        <item>US</item>
+        <item>CA</item>
+        <item>UK</item>
+        <item>DE</item>
+        <item>FR</item>
+        <item>IN</item>
+        <item>AU</item>
+        <item>JP</item>
+        <item>BR</item>
+        <item>MX</item>
+    </string-array>
+
+    <string-array name="theme_options">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>Follow System</item>
+    </string-array>
+
+    <string-array name="theme_values">
+        <item>light</item>
+        <item>dark</item>
+        <item>system</item>
+    </string-array>
+</resources>
