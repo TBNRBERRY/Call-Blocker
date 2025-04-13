@@ -43,7 +43,8 @@ To build and run the application locally:
 
 📄 Usage
 
-Provide detailed instructions on how to use the app, including how to add numbers to the block list, enable/disable blocking, and any other relevant features.
+Provide detailed instructions on how to use the app, including how to add numbers to the block list, enable/disable blocking, and any other relevant features. TODO
+
 🤝 Contributing
 
 Contributions are welcome! To contribute:
