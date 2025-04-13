@@ -4,12 +4,12 @@
     <string name="select_country">Select Country</string>
     <string name="enter_prefix">Enter Prefix</string>
     <string name="block_unknown_callers">Block Unknown Callers</string>
-    <string name="save_preferences">Save Preferences</string>
-    <string name="off">Off</string>
     <string name="filter_by_prefix">Filter by Prefix</string>
     <string name="filter_by_country">Filter by Country</string>
     <string name="filter_by_area_code">Filter by Area Code</string>
     <string name="enter_area_code">Enter Area Code</string>
+    <string name="caller_name_or_number">Caller Name or Number</string>
+    <string name="incoming_at_apr_10_2_30_pm">→ Incoming at Apr 10, 2:30 PM</string>
 
 
 </resources>

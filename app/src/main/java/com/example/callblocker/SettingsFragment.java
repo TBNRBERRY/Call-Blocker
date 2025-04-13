@@ -38,13 +38,16 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private int getNightModeFromValue(String value) {
-        switch (value) {
-            case "light":
+         switch (value) {
+            case "light" -> {
                 return AppCompatDelegate.MODE_NIGHT_NO;
-            case "dark":
+            }
+            case "dark" -> {
                 return AppCompatDelegate.MODE_NIGHT_YES;
-            default:
+            }
+            default -> {
                 return AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
+            }
         }
     }
 }

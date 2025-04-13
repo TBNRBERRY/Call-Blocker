@@ -1,11 +1,10 @@
 package com.example.callblocker;
 
-import android.telecom.CallScreeningService;
-import android.telecom.Call;
 import android.content.SharedPreferences;
+import android.telecom.Call;
 import android.util.Log;
 
-public class MyCallScreeningService extends CallScreeningService {
+public class CallScreeningService extends android.telecom.CallScreeningService {
 
     @Override
     public void onScreenCall(Call.Details callDetails) {

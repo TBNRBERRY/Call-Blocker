@@ -9,7 +9,7 @@
         android:id="@+id/callerNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Caller Name or Number"
+        android:text="@string/caller_name_or_number"
         android:textStyle="bold"
         android:textSize="16sp" />
 
@@ -17,7 +17,7 @@
         android:id="@+id/callDetailsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="→ Incoming at Apr 10, 2:30 PM"
+        android:text="@string/incoming_at_apr_10_2_30_pm"
         android:textSize="14sp"
         android:textColor="#666" />
 </LinearLayout>
