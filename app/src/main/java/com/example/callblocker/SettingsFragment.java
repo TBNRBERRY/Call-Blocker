@@ -10,12 +10,23 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-        // Load preferences from XML
+        // Load preferences from the XML file
         setPreferencesFromResource(R.xml.preferences, rootKey);
 
+        // Theme preference: Apply selected theme
         ListPreference themePref = findPreference("pref_theme");
+        if (themePref != null) {
+            themePref.setOnPreferenceChangeListener((preference, newValue) -> {
+                AppCompatDelegate.setDefaultNightMode(getNightModeFromValue((String) newValue));
+                requireActivity().recreate(); // Recreate the activity to apply theme
+                return true;
+            });
+        }
+
+        // Area Code filter: Enable/disable area code input
         SwitchPreferenceCompat areaCodeSwitch = findPreference("pref_enable_area_code_filter");
         EditTextPreference areaCodeInput = findPreference("pref_area_codes");
 
@@ -29,14 +40,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             });
         }
 
-        if (themePref != null) {
-            themePref.setOnPreferenceChangeListener((preference, newValue) -> {
-                AppCompatDelegate.setDefaultNightMode(getNightModeFromValue((String) newValue));
-                requireActivity().recreate(); // Recreate activity to apply the new theme
-                return true;
-            });
-        }
-
+        // Navigate to BlockedNumbersFragment when "Blocked Numbers" is clicked
         Preference blockedListPref = findPreference("blocked_numbers");
         if (blockedListPref != null) {
             blockedListPref.setOnPreferenceClickListener(preference -> {
@@ -51,16 +55,13 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private int getNightModeFromValue(String value) {
-         switch (value) {
-            case "light" -> {
+        switch (value) {
+            case "light":
                 return AppCompatDelegate.MODE_NIGHT_NO;
-            }
-            case "dark" -> {
+            case "dark":
                 return AppCompatDelegate.MODE_NIGHT_YES;
-            }
-            default -> {
+            default:
                 return AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
-            }
         }
     }
 }
