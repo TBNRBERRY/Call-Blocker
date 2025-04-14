@@ -54,6 +54,19 @@ public class BlockedNumbersFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshBlockList();
+    }
+
+    private void refreshBlockList() {
+        List<String> updatedList = new ArrayList<>(blockListManager.getBlockList());
+        adapter.clear();
+        adapter.addAll(updatedList);
+        adapter.notifyDataSetChanged();
+    }
+
     private void showConfirmationDialog(String number) {
         new AlertDialog.Builder(requireContext())
                 .setTitle("Remove Blocked Number")

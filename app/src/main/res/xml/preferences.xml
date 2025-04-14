@@ -41,7 +41,7 @@
         android:defaultValue="system" />
 
     <Preference
-        android:key="view_blocked_list"
+        android:key="view_blocked_numbers"
         android:title="View/Edit Blocked Numbers"
         android:summary="See numbers that were auto-blocked and remove if needed"
         android:fragment="com.example.callblocker.BlockedNumbersFragment" />
