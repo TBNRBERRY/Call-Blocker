@@ -4,7 +4,7 @@
     <SwitchPreferenceCompat
         android:key="pref_block_unknown"
         android:title="Block Unknown Callers"
-        android:summary="Automatically block calls from unknown numbers"
+        android:summary="Block calls from numbers not in your contacts. Disables area code filtering when on."
         android:defaultValue="false" />
 
     <ListPreference
@@ -39,5 +39,11 @@
         android:entries="@array/theme_options"
         android:entryValues="@array/theme_values"
         android:defaultValue="system" />
+
+    <Preference
+        android:key="view_blocked_list"
+        android:title="View/Edit Blocked Numbers"
+        android:summary="See numbers that were auto-blocked and remove if needed"
+        android:fragment="com.example.callblocker.BlockedNumbersFragment" />
 
 </PreferenceScreen>
