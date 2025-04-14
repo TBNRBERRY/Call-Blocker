@@ -6,6 +6,7 @@ import android.util.Log;
 
 public class CallScreeningService extends android.telecom.CallScreeningService {
 
+
     @Override
     public void onScreenCall(Call.Details callDetails) {
         String incomingNumber = callDetails.getHandle().getSchemeSpecificPart();

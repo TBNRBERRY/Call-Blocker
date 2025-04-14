@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.CallLog;
 import android.provider.ContactsContract;
@@ -16,6 +17,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ListView callLogListView;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         applyAppTheme(); // Apply the theme before setContentView()
@@ -38,14 +41,18 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         if (checkSelfPermission(android.Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED ||
-                checkSelfPermission(android.Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+                checkSelfPermission(android.Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED ||
+                checkSelfPermission(android.Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED ||
+                checkSelfPermission(android.Manifest.permission.ANSWER_PHONE_CALLS) != PackageManager.PERMISSION_GRANTED) {
 
             requestPermissions(new String[] {
                     android.Manifest.permission.READ_CALL_LOG,
-                    android.Manifest.permission.READ_CONTACTS
+                    android.Manifest.permission.READ_CONTACTS,
+                    android.Manifest.permission.READ_PHONE_STATE,
+                    android.Manifest.permission.ANSWER_PHONE_CALLS
             }, 1);
         } else {
-            loadCallLogs();  // If permission is already granted
+            loadCallLogs();  // If permissions are already granted
         }
     }
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
 
@@ -35,6 +36,18 @@ public class SettingsFragment extends PreferenceFragmentCompat {
                 return true;
             });
         }
+
+        Preference blockedListPref = findPreference("blocked_numbers");
+        if (blockedListPref != null) {
+            blockedListPref.setOnPreferenceClickListener(preference -> {
+                requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(android.R.id.content, new BlockedNumbersFragment())
+                        .addToBackStack(null)
+                        .commit();
+                return true;
+            });
+        }
     }
 
     private int getNightModeFromValue(String value) {
@@ -51,4 +64,3 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         }
     }
 }
-

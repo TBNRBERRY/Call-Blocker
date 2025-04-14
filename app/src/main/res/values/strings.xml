@@ -10,6 +10,11 @@
     <string name="enter_area_code">Enter Area Code</string>
     <string name="caller_name_or_number">Caller Name or Number</string>
     <string name="incoming_at_apr_10_2_30_pm">→ Incoming at Apr 10, 2:30 PM</string>
+    <string name="enter_number_to_block">Enter number to block</string>
+    <string name="add_number">Add Number</string>
+    <string name="remove_number">Remove number</string>
+    <string name="x">x</string>
+    <string name="blocked_number">Blocked Number</string>
 
 
 </resources>
