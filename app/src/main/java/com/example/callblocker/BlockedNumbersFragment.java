@@ -25,7 +25,7 @@ public class BlockedNumbersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, android.view.ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_blocked_numbers, container, false);
+        View root = inflater.inflate(R.layout.blocked_numbers, container, false);
 
         ListView listView = root.findViewById(R.id.block_list_view);
         EditText input = root.findViewById(R.id.block_input);
@@ -34,7 +34,7 @@ public class BlockedNumbersFragment extends Fragment {
         blockListManager = new BlockListManager(requireContext());
         List<String> blockList = new ArrayList<>(blockListManager.getBlockList());
 
-        adapter = new ArrayAdapter<>(requireContext(), R.layout.list_item_blocked_number, R.id.blocked_number_text, blockList);
+        adapter = new ArrayAdapter<>(requireContext(), R.layout.fragment_list_item_blocked_number, R.id.blocked_number_text, blockList);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener((parent, view, position, id) -> {

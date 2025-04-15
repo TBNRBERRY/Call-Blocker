@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <SwitchPreferenceCompat
-        android:key="pref_block_unknown"
+        android:key="pref_block_unknown_callers"
         android:title="Block Unknown Callers"
         android:summary="Block calls from numbers not in your contacts. Disables area code filtering when on."
         android:defaultValue="false" />
