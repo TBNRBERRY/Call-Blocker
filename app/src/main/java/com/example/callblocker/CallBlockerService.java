@@ -1,6 +1,10 @@
 package com.example.callblocker;
 
+import android.content.ContentResolver;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.ContactsContract;
 import android.telecom.Call;
 import android.telecom.CallScreeningService;
 import android.util.Log;
@@ -31,14 +35,17 @@ public class CallBlockerService extends CallScreeningService {
             PreferenceUtils prefs = new PreferenceUtils(getApplicationContext());
             boolean isBlocked = false;
 
-            // 1. Block if not in contacts and "Block Unknown Callers" is ON
-            if (prefs.isBlockUnknownCallersEnabled() && !isInContacts(phoneNumber)) {
+            // Log.d(TAG, "Unknown Caller Blocking Enabled: " + prefs.isUnknownCallerBlockingEnabled());
+
+            // 1. Block if number is not in contacts AND user enabled this filter
+            if (prefs.isUnknownCallerBlockingEnabled() && !isInContacts(phoneNumber)) {
                 isBlocked = true;
+                Log.i(TAG, "Blocking unknown caller (not in contacts): " + phoneNumber);
             }
 
-            // 2. Area code filter
+            /* 2. Area code filter
             if (!isBlocked && prefs.isAreaCodeFilterEnabled()) {
-                String areaCode = getAreaCode(phoneNumber);
+                String areaCode = prefs.getAreaCode(phoneNumber);
                 if (!prefs.getAllowedAreaCodes().contains(areaCode)) {
                     isBlocked = true;
                 }
@@ -46,11 +53,12 @@ public class CallBlockerService extends CallScreeningService {
 
             // 3. Country code filter
             if (!isBlocked && prefs.isCountryFilterEnabled()) {
-                String countryCode = getCountryCode(phoneNumber);
+                String countryCode = prefs.getCountryCode(phoneNumber);
                 if (!prefs.getAllowedCountryCodes().contains(countryCode)) {
                     isBlocked = true;
                 }
             }
+             */
 
             if (isBlocked) {
                 BlockListManager blockListManager = new BlockListManager(getApplicationContext());
@@ -74,15 +82,39 @@ public class CallBlockerService extends CallScreeningService {
     }
 
     private boolean isInContacts(String phoneNumber) {
-        // TODO: Add real contact-check logic
+        Log.d(TAG, "Phone number received: " + phoneNumber);
+
+        Log.d(TAG, "Checking if number is in contacts: " + phoneNumber);
+
+        ContentResolver resolver = getContentResolver();
+        Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
+                Uri.encode(phoneNumber));
+        Cursor cursor = null;
+
+        try {
+            cursor = resolver.query(uri,
+                    new String[]{ContactsContract.PhoneLookup._ID},
+                    null, null, null);
+
+            if (cursor != null) {
+                Log.d(TAG, "Cursor returned: " + cursor.getCount() + " entries");
+                if (cursor.moveToFirst()) {
+                    Log.i(TAG, "Match found in contacts for: " + phoneNumber);
+                    return true;
+                } else {
+                    Log.i(TAG, "No match found in contacts for: " + phoneNumber);
+                }
+            } else {
+                Log.w(TAG, "Cursor is null when checking contacts for: " + phoneNumber);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error checking contacts for number: " + phoneNumber, e);
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+
         return false;
-    }
-
-    private String getAreaCode(String number) {
-        return number.length() >= 10 ? number.substring(number.length() - 10, number.length() - 7) : "";
-    }
-
-    private String getCountryCode(String number) {
-        return number.startsWith("+") ? number.substring(0, 2) : "";
     }
 }

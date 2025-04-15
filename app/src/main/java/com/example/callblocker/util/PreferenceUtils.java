@@ -2,6 +2,7 @@ package com.example.callblocker.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import androidx.preference.PreferenceManager;
 
@@ -17,12 +18,15 @@ public class PreferenceUtils {
         prefs = PreferenceManager.getDefaultSharedPreferences(context);
     }
 
-    public boolean isBlockUnknownCallersEnabled() {
-        return prefs.getBoolean("pref_block_unknown_callers", true);
+    public boolean isUnknownCallerBlockingEnabled() {
+        boolean value = prefs.getBoolean("pref_block_unknown_callers", false);
+        Log.d("PreferenceUtils", "Unknown Caller Blocking Enabled: " + value);
+        return value;
     }
 
     public boolean isAreaCodeFilterEnabled() {
         return prefs.getBoolean("pref_enable_area_code_filter", false);
+
     }
 
     public boolean isCountryFilterEnabled() {
@@ -37,6 +41,14 @@ public class PreferenceUtils {
     public Set<String> getAllowedCountryCodes() {
         String countryCodes = prefs.getString("pref_country_codes", "");
         return new HashSet<>(Arrays.asList(countryCodes.split(",")));
+    }
+
+    public String getAreaCode(String number) {
+        return number.length() >= 10 ? number.substring(number.length() - 10, number.length() - 7) : "";
+    }
+
+    public String getCountryCode(String number) {
+        return number.startsWith("+") ? number.substring(0, 2) : "";
     }
 }
 
